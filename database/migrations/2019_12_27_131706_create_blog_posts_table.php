@@ -19,7 +19,7 @@ class CreateBlogPostsTable extends Migration
             $table->integer('category_id')->unsigned();
             $table->integer('user_id')->unsigned();
 
-            $table->string('slug')->unsigned();
+            $table->string('slug')->unique();
             $table->string('title');
 
             $table->text('excerpt')->nullable();
@@ -35,7 +35,8 @@ class CreateBlogPostsTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('blog_categories');
-            $table->index('is_publisher');
+            $table->index('is_published');
+
         });
     }
 
